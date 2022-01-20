@@ -5,6 +5,8 @@ import {Router} from 'react-router-dom'
 import history from './history'
 import store from './store'
 import App from './App'
+import { Map, GoogleApiWrapper } from 'google-maps-react';
+
 
 ReactDOM.render(
   <Provider store={store}>
