@@ -6,6 +6,7 @@ import Home from './components/Home';
 import {me} from './store'
 import MapContainer from './components/MapPage';
 import DogPark from './components/DogPark';
+import Favorites from './components/Favorites'
 
 /**
  * COMPONENT
@@ -25,6 +26,7 @@ class Routes extends Component {
             <Route path="/home" component={MapContainer} />
             <Route exact path="/map" component = { MapContainer }/>
             <Route path="/map/:dogParkId" component = { DogPark }/>
+            <Route path="/favorites" component = { Favorites }/>
             <Redirect to="/home" />
           </Switch>
         ) : (

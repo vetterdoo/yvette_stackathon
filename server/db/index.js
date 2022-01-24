@@ -18,6 +18,10 @@ DogPark.belongsToMany(User, {
     model: Favorite,
   }
 });
+User.hasMany(Favorite);
+Favorite.belongsTo(User);
+DogPark.hasMany(Favorite);
+Favorite.belongsTo(DogPark);
 
 module.exports = {
   db,

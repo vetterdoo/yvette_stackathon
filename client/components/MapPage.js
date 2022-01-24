@@ -5,10 +5,6 @@ import { fetchDogParks } from "../store/dogParks";
 import { Link } from "react-router-dom";
 //import { fetchSinglePark } from "../store/singlePark";
 
-
-/**
- * COMPONENT
-//  */
 export class MapContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -82,49 +78,6 @@ export class MapContainer extends React.Component {
       </div>
     );
   }
-  // render() {
-  //   const { location } = this.state;
-  //   const { handleSubmit, handleChange } = this;
-
-  //   const  centerCoordinates  = this.props.dogParks[0] === undefined ? { lat: 40.7128, lng: -73.935242 } : { lat: this.props.dogParks[0].coordinates.latitude, lng: this.props.dogParks[0].coordinates.longitude };
-  //  return (
-  //     <div>
-  //       <h1>Dog Parks</h1>
-  //       <form id="location-input" onSubmit={handleSubmit}>
-  //         <label htmlFor="location"> Zip Code:</label>
-  //         <input name="location" onChange={handleChange} value={location} />
-  //         <button type="submit">Search</button>
-  //       </form>
-  //       <div className="mapStyles">
-  //         <Map
-  //           google={this.props.google}
-  //           zoom={10} 
-  //           center= {centerCoordinates}
-  //         >
-  //             {this.props.dogParks.map((dogPark) => {
-  //             return (
-  //               <div key={dogPark.id}>
-  //               {/* <Link to={`/map/${dogPark.id}`}> */}
-  //               <Marker
-  //                 position={{
-  //                   lat: dogPark.coordinates.latitude,
-  //                   lng: dogPark.coordinates.longitude,
-  //                 }}
-  //                 // onClick={() => {
-  //                 //   //alert("Clicked the Marker!");
-  //                 //   //this.props.fetchSinglePark(dogPark.id);
-  //                 //   window.open(`/map/${dogPark.id}`)
-  //                 // }}
-  //               />
-  //               {/* </Link> */}
-  //               </div>
-  //             );
-  //           })}
-  //         </Map>
-  //       </div>
-  //     </div>
-  //   );
-  // }
 }
 
 const mapState = (state) => {
