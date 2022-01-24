@@ -2,7 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import { fetchDogParks } from "../store/dogParks";
-import {ReactHover} from "react-hover"
+import { Link } from "react-router-dom";
+//import { fetchSinglePark } from "../store/singlePark";
+
 
 /**
  * COMPONENT
@@ -44,8 +46,10 @@ export class MapContainer extends React.Component {
     const { location } = this.state;
     const { handleSubmit, handleChange } = this;
 
+    const  centerCoordinates  = this.props.dogParks[0] === undefined ? { lat: 40.7128, lng: -73.935242 } : { lat: this.props.dogParks[0].coordinates.latitude, lng: this.props.dogParks[0].coordinates.longitude };
     return (
       <div>
+        <h3>Welcome, {this.props.username}</h3>
         <h1>Dog Parks</h1>
         <form id="location-input" onSubmit={handleSubmit}>
           <label htmlFor="location"> Zip Code:</label>
@@ -56,18 +60,8 @@ export class MapContainer extends React.Component {
           <Map
             google={this.props.google}
             zoom={10}
-            initialCenter={{ lat: 40.7128, lng: -73.935242 }}
-            //initialCenter={{ lat: this.props.dogPark[0].coordinates.latitude, lng: this.props.dogPark[0].coordinates.longitude }}
+            center={centerCoordinates}
           >
-            <Marker
-              position={{ lat: 40.7128, lng: -73.935242 }}
-              onClick={() => {
-                alert("Clicked the Marker!");
-              }}
-              onMouseOver = { () => {
-
-              }}
-            />
 
             {this.props.dogParks.map((dogPark) => {
               return (
@@ -78,7 +72,7 @@ export class MapContainer extends React.Component {
                     lng: dogPark.coordinates.longitude,
                   }}
                   onClick={() => {
-                    alert("Clicked the Marker!");
+                    window.open(`/map/${dogPark.id}`);
                   }}
                 />
               );
@@ -88,10 +82,54 @@ export class MapContainer extends React.Component {
       </div>
     );
   }
+  // render() {
+  //   const { location } = this.state;
+  //   const { handleSubmit, handleChange } = this;
+
+  //   const  centerCoordinates  = this.props.dogParks[0] === undefined ? { lat: 40.7128, lng: -73.935242 } : { lat: this.props.dogParks[0].coordinates.latitude, lng: this.props.dogParks[0].coordinates.longitude };
+  //  return (
+  //     <div>
+  //       <h1>Dog Parks</h1>
+  //       <form id="location-input" onSubmit={handleSubmit}>
+  //         <label htmlFor="location"> Zip Code:</label>
+  //         <input name="location" onChange={handleChange} value={location} />
+  //         <button type="submit">Search</button>
+  //       </form>
+  //       <div className="mapStyles">
+  //         <Map
+  //           google={this.props.google}
+  //           zoom={10} 
+  //           center= {centerCoordinates}
+  //         >
+  //             {this.props.dogParks.map((dogPark) => {
+  //             return (
+  //               <div key={dogPark.id}>
+  //               {/* <Link to={`/map/${dogPark.id}`}> */}
+  //               <Marker
+  //                 position={{
+  //                   lat: dogPark.coordinates.latitude,
+  //                   lng: dogPark.coordinates.longitude,
+  //                 }}
+  //                 // onClick={() => {
+  //                 //   //alert("Clicked the Marker!");
+  //                 //   //this.props.fetchSinglePark(dogPark.id);
+  //                 //   window.open(`/map/${dogPark.id}`)
+  //                 // }}
+  //               />
+  //               {/* </Link> */}
+  //               </div>
+  //             );
+  //           })}
+  //         </Map>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 }
 
 const mapState = (state) => {
   return {
+    username: state.auth.username,
     dogParks: state.dogParks,
   };
 };
@@ -99,6 +137,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchDogParks: (location) => dispatch(fetchDogParks(location)),
+    //fetchSinglePark: (dogPark) => dispatch(fetchSinglePark(dogPark))
   };
 };
 

@@ -37,15 +37,13 @@ export const fetchDogParks = (location) => {
         location = "10019";
       }
       const { data } = await axios.get(
-        `${"https://cors-anywhere.herokuapp.com/"}https://api.yelp.com/v3/businesses/search?term=dog_park&location=${location}&limit=1`,
+        `${"https://cors-anywhere.herokuapp.com/"}https://api.yelp.com/v3/businesses/search?term=dog_park&location=${location}&limit=10`,
         {
           headers: {
             Authorization: `Bearer R2a38N5AUyLRbPzr2sGvZz21cBHgx8hVr5mBkU020IHzSHUEmkEnse5jbCx9T6RsjuiMGU3cDerA4JDduLXzUYoNSsJQR58LxDBOYpQ6kzyhG_SVek-hGiG6TjXrYXYx`,
           },
         }
       );
-
-      console.log(data.businesses);
       dispatch(setDogParks(data.businesses));
     } catch (err) {
       console.log(err);

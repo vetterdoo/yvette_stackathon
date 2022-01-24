@@ -2,6 +2,14 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 
 module.exports = db.define("dogPark", {
+  id: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+    primaryKey: true
+  },
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -9,14 +17,6 @@ module.exports = db.define("dogPark", {
       notEmpty: true,
     },
   },
-  address: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
-  },
-  description: Sequelize.TEXT,
   lat: {
     type: Sequelize.FLOAT,
     allowNull: false,
@@ -30,5 +30,5 @@ module.exports = db.define("dogPark", {
     validate: {
       notEmpty: true,
     },
-  },
+  }
 });

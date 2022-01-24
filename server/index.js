@@ -19,6 +19,3 @@ const init = async () => {
 }
 
 init()
-
-const dotenv = require('dotenv');
-dotenv.config();

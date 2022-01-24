@@ -4,8 +4,10 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import auth from './auth'
 import dogParks from './dogParks'
+import dogPark from './dogPark'
+import favorite from './favorite'
 
-const reducer = combineReducers({ auth, dogParks })
+const reducer = combineReducers({ auth, dogParks, dogPark, favorite })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )

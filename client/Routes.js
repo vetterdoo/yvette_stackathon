@@ -5,6 +5,7 @@ import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import {me} from './store'
 import MapContainer from './components/MapPage';
+import DogPark from './components/DogPark';
 
 /**
  * COMPONENT
@@ -21,8 +22,9 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/home" component={Home} />
-            <Route path="/map" component = { MapContainer }/>
+            <Route path="/home" component={MapContainer} />
+            <Route exact path="/map" component = { MapContainer }/>
+            <Route path="/map/:dogParkId" component = { DogPark }/>
             <Redirect to="/home" />
           </Switch>
         ) : (

@@ -1,6 +1,6 @@
 'use strict'
 
-const {db, models: {User, DogPark} } = require('../server/db')
+const {db, models: {User, DogPark, Favorite} } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -17,8 +17,13 @@ async function seed() {
   ])
 
   const dogParks = await Promise.all([
-    DogPark.create({ name: 'Sample 1', address: '123 Road', lat:40.765830, lng: -73.968850}),
-    DogPark.create({ name: 'Sample 2', address: '456 Road', lat:42.895970, lng: -73.686660 }),
+    DogPark.create({ id: '2CLCE65vUePNNiQ3kZF17Q', name: 'Channel Center Dog Park', lat:42.3433904799243, lng: -71.0530727068265}),
+    DogPark.create({ id:'4zBSwkwFXzMomxdXIduXUg', name: 'East First Street Dog Park', lat:42.34006279277675, lng: -71.03091894026134 }),
+  ])
+
+  const favorites = await Promise.all([
+    Favorite.create({ dogParkId: '2CLCE65vUePNNiQ3kZF17Q', userId: 1 , favorite: 1}),
+    Favorite.create({ dogParkId:'4zBSwkwFXzMomxdXIduXUg', userId: 1, favorite: 1}),
   ])
 
   console.log(`seeded ${users.length} users`)
