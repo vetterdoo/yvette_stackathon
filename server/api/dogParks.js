@@ -5,6 +5,7 @@ const Favorite = require("../db/models/Favorite");
 const User = require("../db/models/User");
 const { user } = require("pg/lib/defaults");
 const { redirect } = require("express/lib/response");
+require('dotenv').config()
 
 const hasToken = async (req, res, next) => {
   const user = await User.findByToken(req.headers.authorization);

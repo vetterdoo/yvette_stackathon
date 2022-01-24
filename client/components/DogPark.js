@@ -41,9 +41,6 @@ export class DogPark extends React.Component {
       <div id="dog-park">
         <h1>Dog Park Info</h1>
         <h2>{dogPark.name}</h2>
-        <div className="picture">
-          <img className="picSrc" src={dogPark.image_url} />
-        </div>
         <button
           className="favorite"
           onClick={() => {
@@ -61,6 +58,9 @@ export class DogPark extends React.Component {
         >
           Unfavorite
         </button>
+        <div className="picture">
+          <img className="picSrc" src={dogPark.image_url} />
+        </div>
       </div>
     );
   }
