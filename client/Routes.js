@@ -23,11 +23,11 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/home" component={MapContainer} />
+            <Route path="/" component={MapContainer} />
             <Route exact path="/map" component = { MapContainer }/>
             <Route exact path="/map/:dogParkId" component = { DogPark }/>
             <Route path="/favorites" component = { Favorites }/>
-            <Redirect to="/home" />
+            <Redirect to="/" />
           </Switch>
         ) : (
           <Switch>
