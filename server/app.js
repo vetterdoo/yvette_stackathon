@@ -4,6 +4,10 @@ const morgan = require('morgan')
 const app = express()
 module.exports = app
 
+require("dotenv").config();
+const YELP_API_KEY = process.env.REACT_APP_API_KEY
+const YELP_CLIENT_KEY = process.env.REACT_APP_CLIENT_ID
+
 // logging middleware
 app.use(morgan('dev'))
 
@@ -13,6 +17,14 @@ app.use(express.json())
 // auth and api routes
 app.use('/auth', require('./auth'))
 app.use('/api', require('./api'))
+
+app.post("/api/map", (req, res) => {
+  const yelpApi = {
+    clientKey: YELP_CLIENT_KEY,
+    APIKey: YELP_API_KEY,
+  };
+  res.json(yelpApi);
+});
 
 app.get('/', (req, res)=> res.sendFile(path.join(__dirname, '..', 'public/index.html')));
 

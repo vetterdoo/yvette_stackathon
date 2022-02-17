@@ -25,7 +25,7 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={MapContainer} />
             <Route exact path="/map" component = { MapContainer }/>
-            <Route path="/map/:dogParkId" component = { DogPark }/>
+            <Route exact path="/map/:dogParkId" component = { DogPark }/>
             <Route path="/favorites" component = { Favorites }/>
             <Redirect to="/home" />
           </Switch>

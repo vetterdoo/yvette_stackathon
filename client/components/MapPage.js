@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
-import { fetchDogParks } from "../store/dogParks";
-import { Link } from "react-router-dom";
+import { fetchDogParks, addDogParks } from "../store/dogParks";
+//import { Link } from "react-router-dom";
 //import { fetchSinglePark } from "../store/singlePark";
+import history from "../history"
 
 export class MapContainer extends React.Component {
   constructor(props) {
@@ -36,6 +37,7 @@ export class MapContainer extends React.Component {
   async handleSubmit(evt) {
     evt.preventDefault();
     await this.props.fetchDogParks(this.state.location);
+    //await this.props.addDogParks(this.state.location, this.props.dogParks);
   }
 
   render() {
@@ -49,7 +51,9 @@ export class MapContainer extends React.Component {
         <h1>Dog Parks</h1>
         <form id="location-input" onSubmit={handleSubmit}>
           <label htmlFor="location"> Zip Code:</label>
-          <input name="location" onChange={handleChange} value={location} />
+          <input name="location" onChange={handleChange} 
+          // value={this.state.location} 
+          />
           <button type="submit">Search</button>
         </form>
         <div className="mapStyles">
@@ -59,7 +63,7 @@ export class MapContainer extends React.Component {
             center={centerCoordinates}
           >
 
-            {this.props.dogParks.map((dogPark) => {
+            {this.props.dogParks.map((dogPark, index) => {
               return (
                 <Marker
                   key={dogPark.id}
@@ -68,7 +72,21 @@ export class MapContainer extends React.Component {
                     lng: dogPark.coordinates.longitude,
                   }}
                   onClick={() => {
-                    window.open(`/map/${dogPark.id}`);
+                   // console.log(this.props);
+                    //this.props.addDogParks(this.props.location, dogPark);
+                    history.push({
+                      pathname: `/map/${dogPark.id}`,
+                      state: {
+                        thisPark: dogPark,
+                        num: index}
+                      // state:  {
+                      //   lat: dogPark.coordinates.latitude,
+                      //   lng: dogPark.coordinates.longitude,
+                      // } ,
+                    });
+
+
+                    // window.open(`/map/${dogPark.id}`);
                   }}
                 />
               );
@@ -90,6 +108,8 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchDogParks: (location) => dispatch(fetchDogParks(location)),
+    addDogParks: (location, dogParks) => dispatch(addDogParks(location, dogParks)),
+
     //fetchSinglePark: (dogPark) => dispatch(fetchSinglePark(dogPark))
   };
 };

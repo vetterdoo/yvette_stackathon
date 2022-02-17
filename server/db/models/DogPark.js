@@ -30,5 +30,17 @@ module.exports = db.define("dogPark", {
     validate: {
       notEmpty: true,
     },
+  },
+  image_url: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  address_1: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  address_2: {
+    type: Sequelize.STRING,
+    allowNull: true,
   }
 });

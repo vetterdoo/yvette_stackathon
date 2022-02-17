@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 import { fetchFavorites } from "../store/favorite";
 import { Link } from "react-router-dom";
+import history from "../history";
 
 export class Favorites extends React.Component {
   constructor(props) {
@@ -21,7 +22,7 @@ export class Favorites extends React.Component {
         <div className="mapStyles">
           <ol>
             {this.props.dogParks.map((dogPark) => {
-              return <li key = {dogPark.id}>{dogPark.name}</li>;
+              return <li key={dogPark.id}>{dogPark.name}</li>;
             })}
           </ol>
           <Map
@@ -30,17 +31,27 @@ export class Favorites extends React.Component {
             center={{ lat: 37.0902, lng: -95.7129 }}
             //{centerCoordinates}
           >
-            {this.props.dogParks.map((dogPark) => {
+            {this.props.dogParks.map((dogPark, index) => {
               return (
                 <Marker
-                  key={dogPark.id}
-                  label = {String(this.props.dogParks.indexOf(dogPark)+1)}
+                  key={index}
+                  label={String(this.props.dogParks.indexOf(dogPark) + 1)}
                   position={{
                     lat: dogPark.lat,
                     lng: dogPark.lng,
                   }}
+                  // onClick={() => {
+                  //   window.open(`/map/${dogPark.id}`);
+                  // }}
                   onClick={() => {
-                    window.open(`/map/${dogPark.id}`);
+                    // console.log(this.props);
+                    //this.props.addDogParks(this.props.location, dogPark);
+                    history.push({
+                      pathname: `/map/${dogPark.id}`,
+                      state: {
+                        thisPark: dogPark,
+                      },
+                    });
                   }}
                 />
               );

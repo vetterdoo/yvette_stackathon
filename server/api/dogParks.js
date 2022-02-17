@@ -5,7 +5,12 @@ const Favorite = require("../db/models/Favorite");
 const User = require("../db/models/User");
 const { user } = require("pg/lib/defaults");
 const { redirect } = require("express/lib/response");
-require('dotenv').config()
+require("dotenv").config();
+const yelp = require("yelp-fusion");
+const apiKey = process.env.REACT_APP_API_KEY;
+
+const client = yelp.client(apiKey);
+const clientId = process.env.REACT_APP_CLIENT_ID;
 
 const hasToken = async (req, res, next) => {
   const user = await User.findByToken(req.headers.authorization);
@@ -16,6 +21,22 @@ const hasToken = async (req, res, next) => {
     next(new Error("User is not logged in"));
   }
 };
+
+router.get("/yelp/:location", async (req, res, next) => {
+  try {
+    client
+      .search({
+        term: "dog_park",
+        location: req.params.location,
+      })
+      .then((response) => {
+        res.send(response.jsonBody.businesses);
+      });
+    //res.json(dogParks);
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.get("/", hasToken, async (req, res, next) => {
   try {
@@ -38,12 +59,15 @@ router.post("/:dogParkId", hasToken, async (req, res, next) => {
   try {
     const user = req.user;
     //console.log(req.body.coordinates)
-    const dogPark = await DogPark.findOrCreate({
+    await DogPark.findOrCreate({
       where: {
         id: req.params.dogParkId,
         name: req.body.name,
         lat: req.body.coordinates.latitude,
         lng: req.body.coordinates.longitude,
+        image_url: req.body.image_url,
+        address_1: req.body.location.display_address[0],
+        address_2: req.body.location.display_address[1]
       },
     });
     const favorite = await Favorite.findOrCreate({

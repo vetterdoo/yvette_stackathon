@@ -17,14 +17,14 @@ async function seed() {
   ])
 
   const dogParks = await Promise.all([
-    DogPark.create({ id: '2CLCE65vUePNNiQ3kZF17Q', name: 'Channel Center Dog Park', lat:42.3433904799243, lng: -71.0530727068265}),
-    DogPark.create({ id:'4zBSwkwFXzMomxdXIduXUg', name: 'East First Street Dog Park', lat:42.34006279277675, lng: -71.03091894026134 }),
+    DogPark.create({ id: '2CLCE65vUePNNiQ3kZF17Q', name: 'Channel Center Dog Park', lat:42.3433904799243, lng: -71.0530727068265, image_url: 'https://www.yelp.com/biz_photos/2CLCE65vUePNNiQ3kZF17Q?select=xFarx8japToDqLQDAh3HCQ', address_1: '', address_2: '' }),
+    DogPark.create({ id:'4zBSwkwFXzMomxdXIduXUg', name: 'East First Street Dog Park', lat:42.34006279277675, lng: -71.03091894026134, image_url: 'https://s3-media0.fl.yelpcdn.com/bphoto/5KRKzB_CUs1SA_RG8hNpQQ/o.jpg', address_1: '', address_2: '' }),
   ])
 
-  const favorites = await Promise.all([
-    Favorite.create({ dogParkId: '2CLCE65vUePNNiQ3kZF17Q', userId: 1 , favorite: 1}),
-    Favorite.create({ dogParkId:'4zBSwkwFXzMomxdXIduXUg', userId: 1, favorite: 1}),
-  ])
+  // const favorites = await Promise.all([
+  //   Favorite.create({ dogParkId: '2CLCE65vUePNNiQ3kZF17Q', userId: 1 , favorite: 1}),
+  //   Favorite.create({ dogParkId:'4zBSwkwFXzMomxdXIduXUg', userId: 1, favorite: 1}),
+  // ])
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
