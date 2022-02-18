@@ -58,7 +58,6 @@ router.get("/", hasToken, async (req, res, next) => {
 router.post("/:dogParkId", hasToken, async (req, res, next) => {
   try {
     const user = req.user;
-    console.log("REQ.BODY:!!!!!!", req.body)
     await DogPark.findOrCreate({
       where: {
         id: req.params.dogParkId,

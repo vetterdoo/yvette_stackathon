@@ -21,6 +21,7 @@ export class DogPark extends React.Component {
         <button
           className="favorite"
           onClick={() => {
+            console.log(dogPark);
             this.props.addFavorite(dogPark.id, dogPark);   
           }}
         >
