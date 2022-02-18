@@ -44,7 +44,6 @@ export class Favorites extends React.Component {
                   //   window.open(`/map/${dogPark.id}`);
                   // }}
                   onClick={() => {
-                    // console.log(this.props);
                     //this.props.addDogParks(this.props.location, dogPark);
                     history.push({
                       pathname: `/map/${dogPark.id}`,
@@ -59,6 +58,10 @@ export class Favorites extends React.Component {
                               dogPark.address_2,
                             ],
                           },
+                          coordinates: {
+                            latitude: dogPark.lat,
+                            longitude: dogPark.lng
+                          }
                         },
                       },
                     });

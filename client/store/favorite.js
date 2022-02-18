@@ -38,14 +38,14 @@ export const addFavorite = (dogParkId, dogPark) => {
   const token = window.localStorage.getItem(TOKEN);
   return async (dispatch) => {
     try {
-      const { data } = await axios.post(`/api/dogParks/${dogParkId}`, dogPark, {
+      const { data } = await axios.post(`/api/dogParks/${dogParkId}`, {dogPark}, {
         headers: {
           authorization: token,
         },
       });
       dispatch(addFavoriteAction(data));
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data);
     }
   };
 };
