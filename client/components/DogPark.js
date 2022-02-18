@@ -10,7 +10,7 @@ export class DogPark extends React.Component {
 
   render() {
     const dogPark = this.props.location.state.thisPark;
-   console.log(dogPark);
+   //console.log(dogPark);
 
     return (
       <div id="dog-park">
