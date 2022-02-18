@@ -49,7 +49,17 @@ export class Favorites extends React.Component {
                     history.push({
                       pathname: `/map/${dogPark.id}`,
                       state: {
-                        thisPark: dogPark,
+                        thisPark: {
+                          id: dogPark.id,
+                          image_url: dogPark.image_url,
+                          name: dogPark.name,
+                          location: {
+                            display_address: [
+                              dogPark.address_1,
+                              dogPark.address_2,
+                            ],
+                          },
+                        },
                       },
                     });
                   }}

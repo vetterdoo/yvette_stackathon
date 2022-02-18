@@ -52,7 +52,7 @@ export class MapContainer extends React.Component {
         <form id="location-input" onSubmit={handleSubmit}>
           <label htmlFor="location"> Zip Code:</label>
           <input name="location" onChange={handleChange} 
-          // value={this.state.location} 
+          value={location} 
           />
           <button type="submit">Search</button>
         </form>
@@ -72,21 +72,12 @@ export class MapContainer extends React.Component {
                     lng: dogPark.coordinates.longitude,
                   }}
                   onClick={() => {
-                   // console.log(this.props);
-                    //this.props.addDogParks(this.props.location, dogPark);
                     history.push({
                       pathname: `/map/${dogPark.id}`,
                       state: {
                         thisPark: dogPark,
                         num: index}
-                      // state:  {
-                      //   lat: dogPark.coordinates.latitude,
-                      //   lng: dogPark.coordinates.longitude,
-                      // } ,
                     });
-
-
-                    // window.open(`/map/${dogPark.id}`);
                   }}
                 />
               );

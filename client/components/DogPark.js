@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { setDogParks } from "../store/dogParks";
 import { addFavorite, deleteFavorite } from "../store/favorite";
 
 export class DogPark extends React.Component {
@@ -9,12 +10,14 @@ export class DogPark extends React.Component {
 
   render() {
     const dogPark = this.props.location.state.thisPark;
-   // console.log(this.props.location.state.num);
+   console.log(dogPark);
 
     return (
       <div id="dog-park">
         <h1>Dog Park Info</h1>
         <h2>{dogPark.name}</h2>
+        <p>{dogPark.location.display_address[0]}</p>
+        <p>{dogPark.location.display_address[1]}</p>
         <button
           className="favorite"
           onClick={() => {
