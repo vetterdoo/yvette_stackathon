@@ -66,7 +66,7 @@ router.post("/:dogParkId", hasToken, async (req, res, next) => {
         lng: req.body.coordinates.longitude,
         image_url: req.body.image_url,
         address_1: req.body.location.display_address[0],
-        address_2: req.body.location.display_address[1]
+        address_2: req.body.location.display_address[1],
       },
     });
     const favorite = await Favorite.findOrCreate({
